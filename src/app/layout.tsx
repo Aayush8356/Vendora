@@ -17,6 +17,14 @@ export const metadata: Metadata = {
   authors: [{ name: 'Premium Template Team' }],
   creator: 'Vendora Template',
   publisher: 'Vendora Template',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16 32x32', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' }
+    ],
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' }
+  },
+  manifest: '/manifest.json',
   openGraph: {
     type: 'website',
     locale: 'en_US',
