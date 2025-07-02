@@ -166,7 +166,7 @@ const ProductsPage = () => {
   };
 
   const applyFilters = () => {
-    let filtered = products.filter(product => {
+    const filtered = products.filter(product => {
       // Enhanced search query filter - search in name, description, category, and tags
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
