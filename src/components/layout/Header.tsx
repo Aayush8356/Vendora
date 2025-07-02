@@ -42,11 +42,28 @@ const Header = () => {
     { name: 'Demo', href: '/demo' },
   ];
 
+  const searchSuggestions = [
+    'Wireless Headphones', 'Smartphone', 'Laptop', 'Gaming Mouse', 'Keyboard',
+    'Monitor', 'Tablet', 'Smart Watch', 'Camera', 'Speaker'
+  ];
+
+  const filteredSuggestions = searchQuery.length > 1 
+    ? searchSuggestions.filter(suggestion => 
+        suggestion.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 5)
+    : [];
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
       window.location.href = `/products?search=${encodeURIComponent(searchQuery.trim())}`;
+      setSearchQuery(''); // Clear search after submission
     }
+  };
+
+  const handleSuggestionClick = (suggestion: string) => {
+    setSearchQuery(suggestion);
+    window.location.href = `/products?search=${encodeURIComponent(suggestion)}`;
   };
 
   return (
@@ -90,24 +107,46 @@ const Header = () => {
 
           {/* Search Bar - Desktop */}
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
-            <form onSubmit={handleSearch} className="relative w-full">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search products..."
-                className="w-full px-5 py-3 pl-12 pr-4 text-sm bg-neutral-50 border-2 border-neutral-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent transition-all duration-200"
-              />
-              <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
-              <motion.button 
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2 rounded-xl hover:from-amber-700 hover:to-orange-800 transition-colors duration-200"
-              >
-                <MagnifyingGlassIcon className="h-4 w-4" />
-              </motion.button>
-            </form>
+            <div className="relative w-full">
+              <form onSubmit={handleSearch} className="relative w-full group">
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search products..."
+                  className="w-full px-5 py-3 pl-12 pr-16 text-sm bg-white/80 backdrop-blur-sm border-2 border-neutral-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white transition-all duration-200 hover:border-amber-300"
+                />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
+                <button 
+                  type="submit"
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2.5 rounded-xl hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50"
+                  disabled={!searchQuery.trim()}
+                >
+                  <MagnifyingGlassIcon className="h-4 w-4" />
+                </button>
+              </form>
+              
+              {/* Search Suggestions */}
+              {filteredSuggestions.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 rounded-xl shadow-xl z-50 overflow-hidden"
+                >
+                  {filteredSuggestions.map((suggestion, index) => (
+                    <button
+                      key={suggestion}
+                      onClick={() => handleSuggestionClick(suggestion)}
+                      className="w-full px-4 py-3 text-left text-sm text-neutral-700 hover:bg-amber-50 hover:text-amber-700 transition-colors duration-150 flex items-center space-x-3"
+                    >
+                      <MagnifyingGlassIcon className="h-4 w-4 text-neutral-400" />
+                      <span>{suggestion}</span>
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </div>
           </div>
 
           {/* Right Side Actions */}
@@ -298,15 +337,22 @@ const Header = () => {
             >
               <div className="py-6 space-y-4">
                 {/* Mobile Search */}
-                <form onSubmit={handleSearch} className="relative">
+                <form onSubmit={handleSearch} className="relative group">
                   <input
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
-                    className="w-full px-4 py-3 pl-12 pr-4 text-sm bg-neutral-50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
+                    className="w-full px-4 py-3 pl-12 pr-16 text-sm bg-white border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 hover:border-amber-300"
                   />
-                  <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
+                  <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
+                  <button 
+                    type="submit"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2 rounded-lg hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 disabled:opacity-50"
+                    disabled={!searchQuery.trim()}
+                  >
+                    <MagnifyingGlassIcon className="h-4 w-4" />
+                  </button>
                 </form>
 
                 {/* Mobile Navigation */}
