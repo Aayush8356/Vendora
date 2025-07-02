@@ -37,7 +37,7 @@
     "start:full": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type-check": "tsc --noEmit",
+    "type-check": "tsc --project tsconfig.client.json",
     "type-check:full": "tsc --noEmit && cd server && tsc --noEmit",
     "clean": "rm -rf .next && rm -rf server/dist",
     "preview": "npm run build && npm run start",

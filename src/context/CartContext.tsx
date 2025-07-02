@@ -10,6 +10,7 @@ interface CartContextType {
   updateQuantity: (itemId: string, quantity: number) => void;
   clearCart: () => void;
   getCartItemsCount: () => number;
+  getCartTotal: () => number;
   isInCart: (productId: string) => boolean;
 }
 
@@ -157,6 +158,10 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return cart.items.reduce((total, item) => total + item.quantity, 0);
   };
 
+  const getCartTotal = () => {
+    return cart.total;
+  };
+
   const isInCart = (productId: string) => {
     return cart.items.some(item => item.product.id === productId);
   };
@@ -168,6 +173,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     updateQuantity,
     clearCart,
     getCartItemsCount,
+    getCartTotal,
     isInCart
   };
 
