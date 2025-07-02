@@ -69,22 +69,22 @@ const Header = () => {
   return (
     <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
       <div className="container">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 z-50">
+          <Link href="/" className="flex items-center space-x-2 sm:space-x-3 z-50 flex-shrink-0">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-2 sm:space-x-3"
             >
               <div className="relative">
-                <div className="w-12 h-12 bg-gradient-to-br from-amber-600 via-orange-600 to-red-700 rounded-2xl flex items-center justify-center shadow-2xl border border-amber-500/30">
-                  <span className="text-white font-bold text-xl drop-shadow-lg">V</span>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-600 via-orange-600 to-red-700 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl border border-amber-500/30">
+                  <span className="text-white font-bold text-lg sm:text-xl drop-shadow-lg">V</span>
                 </div>
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white"></div>
+                <div className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-3 h-3 sm:w-4 sm:h-4 bg-green-400 rounded-full border-2 border-white"></div>
               </div>
-              <div className="hidden sm:block">
-                <div className="text-2xl font-bold text-neutral-900">Vendora</div>
-                <div className="text-xs text-neutral-500 font-medium -mt-1">Demo Template</div>
+              <div className="hidden xs:block">
+                <div className="text-lg sm:text-2xl font-bold text-neutral-900">Vendora</div>
+                <div className="text-xs text-neutral-500 font-medium -mt-1 hidden sm:block">Demo Template</div>
               </div>
             </motion.div>
           </Link>
@@ -105,8 +105,8 @@ const Header = () => {
             })}
           </nav>
 
-          {/* Search Bar - Desktop */}
-          <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
+          {/* Search Bar - Desktop & Tablet */}
+          <div className="hidden sm:flex items-center flex-1 max-w-sm lg:max-w-md mx-4 lg:mx-8">
             <div className="relative w-full">
               <form onSubmit={handleSearch} className="relative w-full group">
                 <input
@@ -114,15 +114,15 @@ const Header = () => {
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..."
-                  className="w-full px-5 py-3 pl-12 pr-16 text-sm bg-white/80 backdrop-blur-sm border-2 border-neutral-200 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white transition-all duration-200 hover:border-amber-300"
+                  className="w-full px-3 py-2 lg:px-5 lg:py-3 pl-10 lg:pl-12 pr-12 lg:pr-16 text-sm bg-white/80 backdrop-blur-sm border-2 border-neutral-200 rounded-xl lg:rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 focus:bg-white transition-all duration-200 hover:border-amber-300"
                 />
-                <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
+                <MagnifyingGlassIcon className="absolute left-3 lg:left-4 top-1/2 transform -translate-y-1/2 h-4 lg:h-5 w-4 lg:w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
                 <button 
                   type="submit"
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2.5 rounded-xl hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50"
+                  className="absolute right-1.5 lg:right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2 lg:p-2.5 rounded-lg lg:rounded-xl hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 transition-all duration-200 disabled:opacity-50"
                   disabled={!searchQuery.trim()}
                 >
-                  <MagnifyingGlassIcon className="h-4 w-4" />
+                  <MagnifyingGlassIcon className="h-3.5 lg:h-4 w-3.5 lg:w-4" />
                 </button>
               </form>
               
@@ -138,7 +138,7 @@ const Header = () => {
                     <button
                       key={suggestion}
                       onClick={() => handleSuggestionClick(suggestion)}
-                      className="w-full px-4 py-3 text-left text-sm text-neutral-700 hover:bg-amber-50 hover:text-amber-700 transition-colors duration-150 flex items-center space-x-3"
+                      className="w-full px-3 lg:px-4 py-2.5 lg:py-3 text-left text-sm text-neutral-700 hover:bg-amber-50 hover:text-amber-700 transition-colors duration-150 flex items-center space-x-2 lg:space-x-3"
                     >
                       <MagnifyingGlassIcon className="h-4 w-4 text-neutral-400" />
                       <span>{suggestion}</span>
@@ -149,16 +149,28 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center space-x-4">
-            {/* Notifications */}
+          {/* Mobile Search Button */}
+          <div className="flex sm:hidden">
             <motion.button
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200"
             >
-              <BellIcon className="h-6 w-6" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+              <MagnifyingGlassIcon className="h-6 w-6" />
+            </motion.button>
+          </div>
+
+          {/* Right Side Actions */}
+          <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-4">
+            {/* Notifications - Hidden on mobile for space */}
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="relative hidden md:flex p-2.5 lg:p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200 min-h-[44px] min-w-[44px] items-center justify-center"
+            >
+              <BellIcon className="h-5 lg:h-6 w-5 lg:w-6" />
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-4 lg:h-5 w-4 lg:w-5 flex items-center justify-center">
                 3
               </span>
             </motion.button>
@@ -166,16 +178,16 @@ const Header = () => {
             {/* Wishlist */}
             <Link href="/wishlist" className="relative">
               <motion.div
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative p-3 text-neutral-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200"
+                className="relative p-2.5 lg:p-3 text-neutral-600 hover:text-red-500 hover:bg-red-50 rounded-xl transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
-                <HeartIcon className="h-6 w-6" />
+                <HeartIcon className="h-5 lg:h-6 w-5 lg:w-6" />
                 {wishlistCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-lg"
+                    className="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold rounded-full h-5 lg:h-6 w-5 lg:w-6 flex items-center justify-center shadow-lg"
                   >
                     {wishlistCount}
                   </motion.span>
@@ -186,16 +198,16 @@ const Header = () => {
             {/* Shopping Cart */}
             <Link href="/cart" className="relative">
               <motion.div
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200"
+                className="relative p-2.5 lg:p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
-                <ShoppingBagIcon className="h-6 w-6" />
+                <ShoppingBagIcon className="h-5 lg:h-6 w-5 lg:w-6" />
                 {getCartItemsCount() > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-600 to-orange-700 text-white text-xs font-bold rounded-full h-6 w-6 flex items-center justify-center shadow-lg"
+                    className="absolute -top-1 -right-1 bg-gradient-to-r from-amber-600 to-orange-700 text-white text-xs font-bold rounded-full h-5 lg:h-6 w-5 lg:w-6 flex items-center justify-center shadow-lg"
                   >
                     {getCartItemsCount()}
                   </motion.span>
@@ -315,7 +327,8 @@ const Header = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200"
+              className="md:hidden p-3 text-neutral-600 hover:text-amber-700 hover:bg-amber-50 rounded-xl transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Toggle menu"
             >
               {isMenuOpen ? (
                 <XMarkIcon className="h-6 w-6" />
@@ -333,39 +346,41 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden border-t border-neutral-200 mt-4"
+              className="md:hidden border-t border-neutral-200 mt-4 bg-white/95 backdrop-blur-sm"
             >
-              <div className="py-6 space-y-4">
-                {/* Mobile Search */}
-                <form onSubmit={handleSearch} className="relative group">
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search products..."
-                    className="w-full px-4 py-3 pl-12 pr-16 text-sm bg-white border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 hover:border-amber-300"
-                  />
-                  <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
-                  <button 
-                    type="submit"
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2 rounded-lg hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 disabled:opacity-50"
-                    disabled={!searchQuery.trim()}
-                  >
-                    <MagnifyingGlassIcon className="h-4 w-4" />
-                  </button>
-                </form>
+              <div className="py-4 space-y-4">
+                {/* Mobile Search - Always visible when menu is open */}
+                <div className="px-4">
+                  <form onSubmit={handleSearch} className="relative group">
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search products..."
+                      className="w-full px-4 py-3.5 pl-12 pr-16 text-base bg-white border-2 border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all duration-200 hover:border-amber-300"
+                    />
+                    <MagnifyingGlassIcon className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400 group-focus-within:text-amber-600 transition-colors duration-200" />
+                    <button 
+                      type="submit"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-amber-600 to-orange-700 text-white p-2.5 rounded-lg hover:from-amber-700 hover:to-orange-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-all duration-200 disabled:opacity-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
+                      disabled={!searchQuery.trim()}
+                    >
+                      <MagnifyingGlassIcon className="h-4 w-4" />
+                    </button>
+                  </form>
+                </div>
 
                 {/* Mobile Navigation */}
-                <div className="space-y-2">
+                <div className="px-4 space-y-1">
                   {navigation.map((item) => {
                     const isActive = pathname === item.href;
                     return (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`block px-4 py-3 rounded-xl transition-all duration-200 font-medium ${
+                        className={`block px-4 py-4 rounded-xl transition-all duration-200 font-medium text-base min-h-[48px] flex items-center ${
                           isActive 
-                            ? 'text-amber-700 bg-amber-50 font-semibold' 
+                            ? 'text-amber-700 bg-amber-50 font-semibold border-l-4 border-amber-600' 
                             : 'text-neutral-700 hover:text-amber-700 hover:bg-amber-50'
                         }`}
                         onClick={() => setIsMenuOpen(false)}
@@ -375,28 +390,55 @@ const Header = () => {
                     );
                   })}
                 </div>
+
+                {/* Mobile Quick Actions */}
+                <div className="px-4 pt-2 border-t border-neutral-200">
+                  <div className="grid grid-cols-2 gap-3">
+                    {/* Notifications - Now visible on mobile */}
+                    <button className="flex items-center justify-center space-x-2 px-4 py-3 bg-neutral-100 hover:bg-amber-50 rounded-xl transition-all duration-200 min-h-[48px]">
+                      <BellIcon className="h-5 w-5 text-neutral-600" />
+                      <span className="text-sm font-medium text-neutral-700">Alerts</span>
+                      <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">3</span>
+                    </button>
+                    
+                    {/* Wishlist Mobile */}
+                    <Link href="/wishlist" onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex items-center justify-center space-x-2 px-4 py-3 bg-neutral-100 hover:bg-red-50 rounded-xl transition-all duration-200 min-h-[48px]">
+                        <HeartIcon className="h-5 w-5 text-neutral-600" />
+                        <span className="text-sm font-medium text-neutral-700">Wishlist</span>
+                        {wishlistCount > 0 && (
+                          <span className="bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                            {wishlistCount}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+                  </div>
+                </div>
                 
                 {/* Mobile Auth Buttons */}
                 {!isAuthenticated && (
-                  <div className="flex flex-col space-y-3 pt-4 border-t border-neutral-200">
-                    <Link href="/login" onClick={() => setIsMenuOpen(false)}>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full btn btn-outline btn-md"
-                      >
-                        Login
-                      </motion.button>
-                    </Link>
-                    <Link href="/register" onClick={() => setIsMenuOpen(false)}>
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full btn btn-primary btn-md"
-                      >
-                        Sign Up
-                      </motion.button>
-                    </Link>
+                  <div className="px-4 pt-4 border-t border-neutral-200">
+                    <div className="grid grid-cols-2 gap-3">
+                      <Link href="/login" onClick={() => setIsMenuOpen(false)}>
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full btn btn-outline btn-md min-h-[48px] text-base"
+                        >
+                          Login
+                        </motion.button>
+                      </Link>
+                      <Link href="/register" onClick={() => setIsMenuOpen(false)}>
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="w-full btn btn-primary btn-md min-h-[48px] text-base"
+                        >
+                          Sign Up
+                        </motion.button>
+                      </Link>
+                    </div>
                   </div>
                 )}
               </div>

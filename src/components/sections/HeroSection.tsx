@@ -50,54 +50,46 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 overflow-hidden">
-      {/* Premium Geometric Background Design */}
+    <section className="relative bg-gradient-to-br from-white via-blue-50/30 to-indigo-50/50 overflow-hidden min-h-[90vh] md:min-h-screen">
+      {/* Optimized Background Design - Reduced complexity on mobile */}
       <div className="absolute inset-0">
-        {/* Main diagonal sweep - Professional navy */}
+        {/* Main diagonal sweep - Simplified for mobile */}
         <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
+          initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="absolute inset-0 bg-gradient-to-br from-blue-900/85 via-indigo-900/70 to-slate-900/50"
           style={{
-            clipPath: "polygon(0 0, 65% 0, 45% 100%, 0 100%)"
+            clipPath: "polygon(0 0, 70% 0, 50% 100%, 0 100%)"
           }}
         />
         
-        {/* Secondary elegant curve - Luxurious flow */}
+        {/* Secondary shape - Hidden on small mobile for performance */}
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
+          initial={{ scale: 0.95, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.4, delay: 0.2, ease: "easeOut" }}
-          className="absolute inset-0 bg-gradient-to-bl from-blue-800/60 via-indigo-800/40 to-transparent"
+          transition={{ duration: 1.0, delay: 0.1, ease: "easeOut" }}
+          className="absolute inset-0 bg-gradient-to-bl from-blue-800/40 via-indigo-800/30 to-transparent hidden sm:block"
           style={{
             clipPath: "polygon(25% 0, 75% 0, 55% 50%, 35% 100%, 0 100%, 0 30%)"
           }}
         />
 
-        {/* Sophisticated accent shape - Golden highlight */}
+        {/* Accent shape - Reduced opacity on mobile */}
         <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
+          initial={{ scale: 0.98, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.6, delay: 0.3, ease: "easeOut" }}
-          className="absolute inset-0 bg-gradient-to-tr from-amber-200/20 via-yellow-100/15 to-transparent"
+          transition={{ duration: 1.2, delay: 0.15, ease: "easeOut" }}
+          className="absolute inset-0 bg-gradient-to-tr from-amber-200/15 via-yellow-100/10 to-transparent opacity-70 md:opacity-100"
           style={{
             clipPath: "polygon(50% 0, 100% 0, 100% 60%, 70% 100%, 40% 70%)"
           }}
         />
         
-        {/* Dynamic geometric overlays */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1.8, delay: 0.4, ease: "easeOut" }}
-          className="absolute top-0 right-0 w-[45%] h-full bg-gradient-to-bl from-slate-100/25 via-blue-50/15 to-transparent"
-          style={{
-            clipPath: "polygon(60% 0, 100% 0, 100% 100%, 80% 100%, 40% 50%)"
-          }}
-        />
+        {/* Overlay for mobile optimization */}
+        <div className="absolute top-0 right-0 w-full md:w-[45%] h-full bg-gradient-to-bl from-slate-100/20 via-blue-50/10 to-transparent hidden md:block" />
         
-        {/* Floating premium elements */}
+        {/* Floating premium elements - Simplified for mobile */}
         <motion.div
           initial={{ scale: 0.7, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -187,81 +179,81 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10 z-[1]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 py-6 lg:py-12">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[85vh]">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-[75vh] sm:min-h-[85vh]">
           {/* Left Column - Content */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-left space-y-4 lg:space-y-6 relative z-10 order-2 lg:order-1"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-left space-y-4 sm:space-y-6 lg:space-y-8 relative z-10 order-2 lg:order-1"
           >
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="inline-flex items-center gap-2 px-5 py-3 bg-white/90 backdrop-blur-md border border-white/60 text-gray-800 rounded-full text-sm font-semibold shadow-lg"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 bg-white/95 backdrop-blur-md border border-white/60 text-gray-800 rounded-full text-sm font-semibold shadow-lg"
             >
               <SparklesIcon className="w-4 h-4 text-amber-600" />
               <span>Demo Template</span>
             </motion.div>
 
-            {/* Main Heading - Improved contrast and readability */}
+            {/* Main Heading - Mobile optimized */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <h1 className="text-4xl lg:text-5xl xl:text-6xl font-black leading-tight mb-4">
-                <span className="text-white drop-shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}>Vendora</span>
-                <span className="block text-white drop-shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}>Deserves</span>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight mb-3 sm:mb-4">
+                <span className="text-white drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>Vendora</span>
+                <span className="block text-white drop-shadow-lg" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.5)' }}>Deserves</span>
                 <span className="block bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">
                   Excellence
                 </span>
               </h1>
             </motion.div>
 
-            {/* Subtitle - Better readability */}
+            {/* Subtitle - Mobile optimized */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="text-base lg:text-lg text-white/95 leading-relaxed max-w-xl"
-              style={{ textShadow: '0 1px 3px rgba(0,0,0,0.3)' }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-sm sm:text-base lg:text-lg text-white/95 leading-relaxed max-w-xl"
+              style={{ textShadow: '0 2px 4px rgba(0,0,0,0.4)' }}
             >
               Transform your business with this stunning eCommerce template. 
               Designed for brands that value quality, elegance, and customer experience.
             </motion.p>
 
-            {/* CTA Buttons - Enhanced styling */}
+            {/* CTA Buttons - Mobile optimized */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="flex flex-col sm:flex-row gap-3 pt-2"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2"
             >
-              <Link href="/products">
+              <Link href="/products" className="w-full sm:w-auto">
                 <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white font-bold rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-500/30 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-700 text-white font-bold rounded-xl sm:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 border border-blue-500/30 hover:from-blue-700 hover:via-blue-800 hover:to-indigo-800 w-full sm:w-auto min-h-[52px]"
                 >
                   <ShoppingBagIcon className="w-5 h-5" />
-                  <span>EXPLORE TEMPLATE</span>
+                  <span className="text-sm sm:text-base">EXPLORE TEMPLATE</span>
                   <ArrowRightIcon className="w-5 h-5" />
                 </motion.div>
               </Link>
 
               <motion.button
                 onClick={handleVideoDemo}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 px-8 py-4 bg-white/90 backdrop-blur-md border border-white/60 text-gray-800 font-semibold rounded-2xl hover:bg-white transition-all duration-300 shadow-lg"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 sm:px-8 py-3.5 sm:py-4 bg-white/95 backdrop-blur-md border border-white/60 text-gray-800 font-semibold rounded-xl sm:rounded-2xl hover:bg-white transition-all duration-300 shadow-lg w-full sm:w-auto min-h-[52px]"
                 disabled={isVideoPlaying}
               >
                 <PlayIcon className={`w-5 h-5 text-blue-600 ${isVideoPlaying ? 'animate-pulse' : ''}`} />
-                <span>{isVideoPlaying ? 'Loading...' : 'Live Preview'}</span>
+                <span className="text-sm sm:text-base">{isVideoPlaying ? 'Loading...' : 'Live Preview'}</span>
               </motion.button>
             </motion.div>
 
