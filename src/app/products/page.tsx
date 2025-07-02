@@ -459,10 +459,10 @@ const ProductsPage = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className={`mb-12 ${
+            className={`mb-8 sm:mb-12 ${
               viewMode === 'grid'
-                ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'
-                : 'space-y-6'
+                ? 'grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-8 gap-3 sm:gap-4 lg:gap-6 xl:gap-8'
+                : 'space-y-4 sm:space-y-6'
             }`}
           >
             {paginatedProducts.map((product, index) => (

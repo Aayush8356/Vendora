@@ -180,13 +180,13 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 py-8 sm:py-12 lg:py-16">
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center min-h-[75vh] sm:min-h-[85vh]">
+        <div className="grid lg:grid-cols-2 3xl:grid-cols-5 gap-6 sm:gap-8 lg:gap-12 items-center min-h-[75vh] sm:min-h-[85vh]">
           {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-left space-y-4 sm:space-y-6 lg:space-y-8 relative z-10 order-2 lg:order-1"
+            className="text-left space-y-4 sm:space-y-6 lg:space-y-8 relative z-10 order-2 lg:order-1 3xl:col-span-3"
           >
             {/* Badge */}
             <motion.div
@@ -297,7 +297,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="relative order-1 lg:order-2 h-full"
+            className="relative order-1 lg:order-2 h-full 3xl:col-span-2"
           >
             {/* Optimized Grid Layout - Fits viewport perfectly */}
             <div className="relative h-full flex flex-col justify-center p-4">

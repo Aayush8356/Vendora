@@ -24,28 +24,28 @@ interface ProductGridProps {
 const ProductGrid = ({ products, loading = false }: ProductGridProps) => {
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {Array.from({ length: 8 }).map((_, index) => (
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-3 sm:gap-4 lg:gap-6">
+        {Array.from({ length: 12 }).map((_, index) => (
           <div
             key={index}
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-pulse"
+            className="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-pulse"
           >
             <div className="aspect-square bg-gray-200"></div>
-            <div className="p-4 space-y-3">
-              <div className="w-20 h-4 bg-gray-200 rounded"></div>
-              <div className="w-full h-5 bg-gray-200 rounded"></div>
-              <div className="w-3/4 h-4 bg-gray-200 rounded"></div>
-              <div className="flex items-center gap-2">
+            <div className="p-3 sm:p-4 space-y-2 sm:space-y-3">
+              <div className="w-16 sm:w-20 h-3 sm:h-4 bg-gray-200 rounded"></div>
+              <div className="w-full h-4 sm:h-5 bg-gray-200 rounded"></div>
+              <div className="w-3/4 h-3 sm:h-4 bg-gray-200 rounded hidden sm:block"></div>
+              <div className="flex items-center gap-1 sm:gap-2">
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <div key={i} className="w-4 h-4 bg-gray-200 rounded"></div>
+                    <div key={i} className="w-3 sm:w-4 h-3 sm:h-4 bg-gray-200 rounded"></div>
                   ))}
                 </div>
-                <div className="w-16 h-4 bg-gray-200 rounded"></div>
+                <div className="w-12 sm:w-16 h-3 sm:h-4 bg-gray-200 rounded"></div>
               </div>
               <div className="flex items-center justify-between">
-                <div className="w-16 h-6 bg-gray-200 rounded"></div>
-                <div className="w-8 h-8 bg-gray-200 rounded"></div>
+                <div className="w-14 sm:w-16 h-5 sm:h-6 bg-gray-200 rounded"></div>
+                <div className="w-6 sm:w-8 h-6 sm:h-8 bg-gray-200 rounded hidden sm:block"></div>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@ const ProductGrid = ({ products, loading = false }: ProductGridProps) => {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 3xl:grid-cols-7 gap-3 sm:gap-4 lg:gap-6"
     >
       {products.map((product) => (
         <motion.div key={product._id} variants={itemVariants}>

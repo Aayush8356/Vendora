@@ -120,7 +120,7 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
-      className="group relative bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="group relative bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* Product Image */}
       <div className="relative aspect-square overflow-hidden bg-gray-50">
@@ -129,12 +129,13 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
             src={displayProduct.image || '/api/placeholder/400/400'}
             alt={displayProduct.name}
             fill
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             className="object-cover group-hover:scale-105 transition-transform duration-300"
           />
         </Link>
         
-        {/* Badges */}
-        <div className="absolute top-3 left-3 z-10 flex flex-col gap-2">
+        {/* Badges - Mobile optimized */}
+        <div className="absolute top-2 sm:top-3 left-2 sm:left-3 z-10 flex flex-col gap-1 sm:gap-2">
           {!displayProduct.inStock && (
             <span className="bg-red-500 text-white text-xs font-medium px-2 py-1 rounded-full">
               Out of Stock
@@ -147,10 +148,10 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
           )}
         </div>
 
-        {/* Wishlist Button */}
+        {/* Wishlist Button - Larger touch target on mobile */}
         <button
           onClick={handleWishlistToggle}
-          className="absolute top-3 right-3 z-10 p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-all duration-200"
+          className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 p-2.5 sm:p-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md hover:bg-white transition-all duration-200 min-h-[44px] min-w-[44px] sm:min-h-auto sm:min-w-auto flex items-center justify-center"
         >
           {templateMode || !isInWishlist(displayProduct._id) ? (
             <HeartIcon className="h-5 w-5 text-gray-600 hover:text-red-500 transition-colors duration-200" />
@@ -159,8 +160,8 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
           )}
         </button>
 
-        {/* Quick Actions */}
-        <div className="absolute bottom-3 left-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* Quick Actions - Always visible on mobile, hover on desktop */}
+        <div className="absolute bottom-2 sm:bottom-3 left-2 sm:left-3 right-2 sm:right-3 z-10 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
           <Button
             onClick={handleAddToCart}
             disabled={!displayProduct.inStock}
@@ -168,7 +169,7 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
             variant="primary"
             size="sm"
             fullWidth
-            className="backdrop-blur-sm bg-white/90 text-gray-900 hover:bg-white shadow-md"
+            className="backdrop-blur-sm bg-white/95 text-gray-900 hover:bg-white shadow-md min-h-[44px] text-sm"
             leftIcon={<ShoppingCartIcon className="h-4 w-4" />}
           >
             {displayProduct.inStock ? 'Add to Cart' : 'Out of Stock'}
@@ -177,7 +178,7 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
       </div>
 
       {/* Product Info */}
-      <div className="p-4">
+      <div className="p-3 sm:p-4">
         {/* Category */}
         <div className="mb-2">
           <span className="text-xs font-medium text-amber-600 bg-amber-50 px-2 py-1 rounded-full">
@@ -187,30 +188,30 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
 
         {/* Product Name */}
         <Link href={templateMode ? '#' : `/products/${displayProduct._id}`}>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-amber-700 transition-colors duration-200">
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-2 hover:text-amber-700 transition-colors duration-200 min-h-[48px] sm:min-h-auto">
             {displayProduct.name}
           </h3>
         </Link>
 
-        {/* Description */}
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+        {/* Description - Hidden on mobile for cleaner look */}
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2 hidden sm:block">
           {displayProduct.description}
         </p>
 
         {/* Rating */}
-        <div className="flex items-center gap-2 mb-3">
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
           <div className="flex items-center">
             {renderStars(displayProduct.rating)}
           </div>
-          <span className="text-sm text-gray-600">
-            {displayProduct.rating} ({displayProduct.reviewCount} reviews)
+          <span className="text-xs sm:text-sm text-gray-600">
+            {displayProduct.rating} ({displayProduct.reviewCount})
           </span>
         </div>
 
         {/* Price */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-xl font-bold text-gray-900">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-lg sm:text-xl font-bold text-gray-900">
               ${displayProduct.price}
             </span>
             {displayProduct.originalPrice && (
@@ -220,14 +221,14 @@ const ProductCard = ({ product, templateMode = false }: ProductCardProps) => {
             )}
           </div>
           
-          {/* Quick Add Button */}
+          {/* Quick Add Button - Hidden on mobile since we have overlay button */}
           <Button
             onClick={handleAddToCart}
             disabled={!displayProduct.inStock}
             isLoading={isLoading}
             variant="outline"
             size="sm"
-            className="md:opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="hidden sm:block md:opacity-0 group-hover:opacity-100 transition-opacity duration-300 min-h-[40px] min-w-[40px]"
           >
             <ShoppingCartIcon className="h-4 w-4" />
           </Button>
