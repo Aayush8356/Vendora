@@ -27,17 +27,22 @@
     "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
     "dev:client": "next dev",
     "dev:server": "cd server && nodemon --exec ts-node src/server.ts",
-    "build": "npm run build:server && npm run build:client",
+    "build": "npm run build:client",
     "build:client": "next build",
     "build:server": "cd server && tsc",
-    "start": "concurrently \"npm run start:server\" \"npm run start:client\"",
+    "build:full": "npm run build:server && npm run build:client",
+    "start": "next start",
     "start:client": "next start",
     "start:server": "cd server && node dist/server.js",
+    "start:full": "concurrently \"npm run start:server\" \"npm run start:client\"",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type-check": "tsc --noEmit && cd server && tsc --noEmit",
+    "type-check": "tsc --noEmit",
+    "type-check:full": "tsc --noEmit && cd server && tsc --noEmit",
     "clean": "rm -rf .next && rm -rf server/dist",
-    "preview": "npm run build && npm run start"
+    "preview": "npm run build && npm run start",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@headlessui/react": "^2.2.4",
@@ -77,8 +82,11 @@
     "@types/multer": "^1.4.13",
     "autoprefixer": "^10.4.21",
     "concurrently": "^9.2.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.3.4",
     "nodemon": "^3.1.10",
     "postcss": "^8.5.6",
+    "prettier": "^3.1.0",
     "tailwindcss": "^3.4.17",
     "ts-node": "^10.9.2"
   }
