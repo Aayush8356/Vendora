@@ -52,7 +52,7 @@ const CartPage = () => {
     }
   };
 
-  if (!cart || cart.length === 0) {
+  if (!cart || cart.items.length === 0) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-neutral-50 to-white">
         <div className="container mx-auto px-4 py-16">
@@ -121,9 +121,9 @@ const CartPage = () => {
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-2 space-y-4"
           >
-            {cart.map((item, index) => (
+            {cart.items.map((item, index) => (
               <motion.div
-                key={item.productId}
+                key={item.product?.id || item.id || index}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -134,8 +134,8 @@ const CartPage = () => {
                   <div className="flex-shrink-0">
                     <div className="w-32 h-32 bg-gray-100 rounded-xl overflow-hidden">
                       <Image
-                        src={item.image}
-                        alt={item.name}
+                        src={item.product?.images?.[0] || '/images/placeholder.jpg'}
+                        alt={item.product?.name || 'Product'}
                         width={128}
                         height={128}
                         className="w-full h-full object-cover"
@@ -147,12 +147,12 @@ const CartPage = () => {
                   <div className="flex-1 space-y-4">
                     <div className="flex justify-between items-start">
                       <div>
-                        <h3 className="text-xl font-bold text-gray-900">{item.name}</h3>
-                        {item.variants && Object.keys(item.variants).length > 0 && (
+                        <h3 className="text-xl font-bold text-gray-900">{item.product?.name || 'Product'}</h3>
+                        {item.variant && Object.keys(item.variant).length > 0 && (
                           <div className="flex gap-4 mt-2">
-                            {Object.entries(item.variants).map(([key, value]) => (
+                            {Object.entries(item.variant).map(([key, value]) => (
                               <span key={key} className="text-sm text-gray-600 capitalize">
-                                {key}: {value}
+                                {key}: {String(value)}
                               </span>
                             ))}
                           </div>
@@ -160,7 +160,7 @@ const CartPage = () => {
                       </div>
                       
                       <button
-                        onClick={() => handleRemoveItem(item.productId)}
+                        onClick={() => handleRemoveItem(item.product?.id || item.id)}
                         className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
                       >
                         <TrashIcon className="w-5 h-5" />
@@ -173,20 +173,20 @@ const CartPage = () => {
                         <span className="text-sm font-medium text-gray-700">Quantity:</span>
                         <div className="flex items-center border border-gray-300 rounded-lg">
                           <button
-                            onClick={() => handleQuantityUpdate(item.productId, item.quantity - 1)}
-                            disabled={item.quantity <= 1 || updatingItems.has(item.productId)}
+                            onClick={() => handleQuantityUpdate(item.product?.id || item.id, item.quantity - 1)}
+                            disabled={item.quantity <= 1 || updatingItems.has(item.product?.id || item.id)}
                             className="p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                           >
                             <MinusIcon className="w-4 h-4" />
                           </button>
                           
                           <span className="px-4 py-2 border-x border-gray-300 min-w-[60px] text-center font-medium">
-                            {updatingItems.has(item.productId) ? '...' : item.quantity}
+                            {updatingItems.has(item.product?.id || item.id) ? '...' : item.quantity}
                           </span>
                           
                           <button
-                            onClick={() => handleQuantityUpdate(item.productId, item.quantity + 1)}
-                            disabled={updatingItems.has(item.productId)}
+                            onClick={() => handleQuantityUpdate(item.product?.id || item.id, item.quantity + 1)}
+                            disabled={updatingItems.has(item.product?.id || item.id)}
                             className="p-2 text-gray-600 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                           >
                             <PlusIcon className="w-4 h-4" />
